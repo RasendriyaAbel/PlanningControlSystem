@@ -34,7 +34,7 @@ import {
   Wrench,
   Play,
   Pause,
-  Stop,
+  Square,
   RotateCcw,
 } from "lucide-react";
 import { cn } from "@/lib/utils";
@@ -312,7 +312,7 @@ export default function Machines() {
                   {stats.offline}
                 </p>
               </div>
-              <Stop className="h-8 w-8 text-gray-600" />
+              <Square className="h-8 w-8 text-gray-600" />
             </div>
           </CardContent>
         </Card>
