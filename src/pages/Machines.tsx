@@ -10,12 +10,7 @@ import {
   SelectTrigger,
   SelectValue,
 } from "@/components/ui/select";
-import {
-  Tabs,
-  TabsContent,
-  TabsList,
-  TabsTrigger,
-} from "@/components/ui/tabs";
+import { Tabs, TabsContent, TabsList, TabsTrigger } from "@/components/ui/tabs";
 import {
   ResponsiveContainer,
   LineChart,
@@ -207,17 +202,22 @@ export default function Machines() {
   const [selectedMachine, setSelectedMachine] = useState<string>("M001");
   const [viewMode, setViewMode] = useState<string>("grid");
 
-  const currentMachine = machines.find(m => m.id === selectedMachine) || machines[0];
+  const currentMachine =
+    machines.find((m) => m.id === selectedMachine) || machines[0];
 
   const stats = {
     total: machines.length,
     online: machines.filter((m) => m.status === "online").length,
     warning: machines.filter((m) => m.status === "warning").length,
     maintenance: machines.filter((m) => m.status === "maintenance").length,
-    offline: machines.filter((m) => m.status === "offline" || m.status === "error").length,
+    offline: machines.filter(
+      (m) => m.status === "offline" || m.status === "error",
+    ).length,
     avgEfficiency: Math.round(
-      machines.filter(m => m.status === "online").reduce((sum, m) => sum + m.efficiency, 0) / 
-      machines.filter(m => m.status === "online").length
+      machines
+        .filter((m) => m.status === "online")
+        .reduce((sum, m) => sum + m.efficiency, 0) /
+        machines.filter((m) => m.status === "online").length,
     ),
   };
 
@@ -226,9 +226,7 @@ export default function Machines() {
       {/* Page Header */}
       <div className="flex items-center justify-between">
         <div>
-          <h1 className="text-3xl font-bold text-gray-900">
-            Monitoring Mesin
-          </h1>
+          <h1 className="text-3xl font-bold text-gray-900">Monitoring Mesin</h1>
           <p className="text-gray-600 mt-1">
             Monitor performa dan status mesin produksi real-time
           </p>
@@ -258,7 +256,9 @@ export default function Machines() {
             <div className="flex items-center justify-between">
               <div>
                 <p className="text-sm font-medium text-gray-600">Total Mesin</p>
-                <p className="text-2xl font-bold text-gray-900">{stats.total}</p>
+                <p className="text-2xl font-bold text-gray-900">
+                  {stats.total}
+                </p>
               </div>
               <Wrench className="h-8 w-8 text-gray-400" />
             </div>
@@ -269,7 +269,9 @@ export default function Machines() {
             <div className="flex items-center justify-between">
               <div>
                 <p className="text-sm font-medium text-gray-600">Online</p>
-                <p className="text-2xl font-bold text-success-600">{stats.online}</p>
+                <p className="text-2xl font-bold text-success-600">
+                  {stats.online}
+                </p>
               </div>
               <Power className="h-8 w-8 text-success-600" />
             </div>
@@ -280,7 +282,9 @@ export default function Machines() {
             <div className="flex items-center justify-between">
               <div>
                 <p className="text-sm font-medium text-gray-600">Peringatan</p>
-                <p className="text-2xl font-bold text-warning-600">{stats.warning}</p>
+                <p className="text-2xl font-bold text-warning-600">
+                  {stats.warning}
+                </p>
               </div>
               <AlertTriangle className="h-8 w-8 text-warning-600" />
             </div>
@@ -291,7 +295,9 @@ export default function Machines() {
             <div className="flex items-center justify-between">
               <div>
                 <p className="text-sm font-medium text-gray-600">Maintenance</p>
-                <p className="text-2xl font-bold text-production-600">{stats.maintenance}</p>
+                <p className="text-2xl font-bold text-production-600">
+                  {stats.maintenance}
+                </p>
               </div>
               <Settings className="h-8 w-8 text-production-600" />
             </div>
@@ -302,7 +308,9 @@ export default function Machines() {
             <div className="flex items-center justify-between">
               <div>
                 <p className="text-sm font-medium text-gray-600">Offline</p>
-                <p className="text-2xl font-bold text-gray-600">{stats.offline}</p>
+                <p className="text-2xl font-bold text-gray-600">
+                  {stats.offline}
+                </p>
               </div>
               <Stop className="h-8 w-8 text-gray-600" />
             </div>
@@ -313,7 +321,9 @@ export default function Machines() {
             <div className="flex items-center justify-between">
               <div>
                 <p className="text-sm font-medium text-gray-600">Efisiensi</p>
-                <p className="text-2xl font-bold text-gray-900">{stats.avgEfficiency}%</p>
+                <p className="text-2xl font-bold text-gray-900">
+                  {stats.avgEfficiency}%
+                </p>
               </div>
               <TrendingUp className="h-8 w-8 text-gray-400" />
             </div>
@@ -325,14 +335,23 @@ export default function Machines() {
       {viewMode === "grid" && (
         <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
           {machines.map((machine) => (
-            <Card key={machine.id} className="relative overflow-hidden hover:shadow-md transition-shadow cursor-pointer" onClick={() => setSelectedMachine(machine.id)}>
+            <Card
+              key={machine.id}
+              className="relative overflow-hidden hover:shadow-md transition-shadow cursor-pointer"
+              onClick={() => setSelectedMachine(machine.id)}
+            >
               <CardHeader className="pb-3">
                 <div className="flex items-center justify-between">
                   <CardTitle className="text-base font-medium">
                     {machine.name}
                   </CardTitle>
                   <div className="flex items-center gap-2">
-                    <div className={cn("h-3 w-3 rounded-full status-indicator", getStatusColor(machine.status))} />
+                    <div
+                      className={cn(
+                        "h-3 w-3 rounded-full status-indicator",
+                        getStatusColor(machine.status),
+                      )}
+                    />
                     {getStatusBadge(machine.status)}
                   </div>
                 </div>
@@ -340,7 +359,9 @@ export default function Machines() {
               </CardHeader>
               <CardContent className="space-y-4">
                 <div>
-                  <p className="text-xs font-medium text-gray-500 mb-1">Pekerjaan Saat Ini</p>
+                  <p className="text-xs font-medium text-gray-500 mb-1">
+                    Pekerjaan Saat Ini
+                  </p>
                   <p className="text-sm text-gray-900">{machine.currentJob}</p>
                 </div>
                 <div className="grid grid-cols-2 gap-4">
@@ -349,7 +370,9 @@ export default function Machines() {
                       <TrendingUp className="h-3 w-3" />
                       Efisiensi
                     </div>
-                    <div className="text-lg font-semibold text-gray-900">{machine.efficiency}%</div>
+                    <div className="text-lg font-semibold text-gray-900">
+                      {machine.efficiency}%
+                    </div>
                     <Progress value={machine.efficiency} className="h-1" />
                   </div>
                   <div className="space-y-1">
@@ -357,7 +380,9 @@ export default function Machines() {
                       <Thermometer className="h-3 w-3" />
                       Suhu
                     </div>
-                    <div className="text-lg font-semibold text-gray-900">{machine.temperature}°C</div>
+                    <div className="text-lg font-semibold text-gray-900">
+                      {machine.temperature}°C
+                    </div>
                   </div>
                 </div>
                 <div className="flex gap-2 pt-2">
@@ -372,14 +397,23 @@ export default function Machines() {
                     </Button>
                   )}
                   {machine.status === "offline" && (
-                    <Button variant="outline" size="sm" className="flex-1 text-success-600 border-success-300 hover:bg-success-50">
+                    <Button
+                      variant="outline"
+                      size="sm"
+                      className="flex-1 text-success-600 border-success-300 hover:bg-success-50"
+                    >
                       <Play className="h-3 w-3 mr-1" />
                       Start
                     </Button>
                   )}
                 </div>
               </CardContent>
-              <div className={cn("absolute bottom-0 left-0 h-1 w-full", getStatusColor(machine.status))} />
+              <div
+                className={cn(
+                  "absolute bottom-0 left-0 h-1 w-full",
+                  getStatusColor(machine.status),
+                )}
+              />
             </Card>
           ))}
         </div>
@@ -401,7 +435,12 @@ export default function Machines() {
                   className="w-full justify-start"
                   onClick={() => setSelectedMachine(machine.id)}
                 >
-                  <div className={cn("h-3 w-3 rounded-full mr-3", getStatusColor(machine.status))} />
+                  <div
+                    className={cn(
+                      "h-3 w-3 rounded-full mr-3",
+                      getStatusColor(machine.status),
+                    )}
+                  />
                   {machine.name}
                 </Button>
               ))}
@@ -414,7 +453,9 @@ export default function Machines() {
               <CardHeader>
                 <div className="flex items-center justify-between">
                   <div>
-                    <CardTitle className="text-xl">{currentMachine.name}</CardTitle>
+                    <CardTitle className="text-xl">
+                      {currentMachine.name}
+                    </CardTitle>
                     <p className="text-gray-600">{currentMachine.type}</p>
                   </div>
                   <div className="flex items-center gap-3">
@@ -440,7 +481,7 @@ export default function Machines() {
                     <TabsTrigger value="details">Detail</TabsTrigger>
                     <TabsTrigger value="maintenance">Maintenance</TabsTrigger>
                   </TabsList>
-                  
+
                   <TabsContent value="performance" className="space-y-4">
                     <div className="grid grid-cols-2 md:grid-cols-4 gap-4">
                       <div className="space-y-2">
@@ -448,40 +489,64 @@ export default function Machines() {
                           <Gauge className="h-4 w-4" />
                           Efisiensi
                         </div>
-                        <div className="text-2xl font-bold text-gray-900">{currentMachine.efficiency}%</div>
-                        <Progress value={currentMachine.efficiency} className="h-2" />
+                        <div className="text-2xl font-bold text-gray-900">
+                          {currentMachine.efficiency}%
+                        </div>
+                        <Progress
+                          value={currentMachine.efficiency}
+                          className="h-2"
+                        />
                       </div>
                       <div className="space-y-2">
                         <div className="flex items-center gap-2 text-sm text-gray-600">
                           <Thermometer className="h-4 w-4" />
                           Suhu
                         </div>
-                        <div className="text-2xl font-bold text-gray-900">{currentMachine.temperature}°C</div>
-                        <div className="text-xs text-gray-500">Normal: 20-85°C</div>
+                        <div className="text-2xl font-bold text-gray-900">
+                          {currentMachine.temperature}°C
+                        </div>
+                        <div className="text-xs text-gray-500">
+                          Normal: 20-85°C
+                        </div>
                       </div>
                       <div className="space-y-2">
                         <div className="flex items-center gap-2 text-sm text-gray-600">
                           <Gauge className="h-4 w-4" />
                           Tekanan
                         </div>
-                        <div className="text-2xl font-bold text-gray-900">{currentMachine.pressure} PSI</div>
-                        <div className="text-xs text-gray-500">Normal: 70-90 PSI</div>
+                        <div className="text-2xl font-bold text-gray-900">
+                          {currentMachine.pressure} PSI
+                        </div>
+                        <div className="text-xs text-gray-500">
+                          Normal: 70-90 PSI
+                        </div>
                       </div>
                       <div className="space-y-2">
                         <div className="flex items-center gap-2 text-sm text-gray-600">
                           <Activity className="h-4 w-4" />
                           Getaran
                         </div>
-                        <div className="text-2xl font-bold text-gray-900">{currentMachine.vibration} mm/s</div>
-                        <div className="text-xs text-gray-500">Normal: < 0.5 mm/s</div>
+                        <div className="text-2xl font-bold text-gray-900">
+                          {currentMachine.vibration} mm/s
+                        </div>
+                        <div className="text-xs text-gray-500">
+                          Normal: &lt; 0.5 mm/s
+                        </div>
                       </div>
                     </div>
-                    
+
                     <div className="h-64">
                       <ResponsiveContainer width="100%" height="100%">
                         <AreaChart data={performanceData}>
-                          <CartesianGrid strokeDasharray="3 3" className="opacity-30" />
-                          <XAxis dataKey="time" tick={{ fontSize: 12 }} axisLine={false} />
+                          <CartesianGrid
+                            strokeDasharray="3 3"
+                            className="opacity-30"
+                          />
+                          <XAxis
+                            dataKey="time"
+                            tick={{ fontSize: 12 }}
+                            axisLine={false}
+                          />
                           <YAxis tick={{ fontSize: 12 }} axisLine={false} />
                           <Tooltip
                             contentStyle={{
@@ -508,49 +573,79 @@ export default function Machines() {
                   <TabsContent value="details" className="space-y-4">
                     <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
                       <div className="space-y-4">
-                        <h4 className="font-semibold text-gray-900">Informasi Umum</h4>
+                        <h4 className="font-semibold text-gray-900">
+                          Informasi Umum
+                        </h4>
                         <div className="space-y-3">
                           <div className="flex justify-between">
                             <span className="text-gray-600">ID Mesin:</span>
-                            <span className="font-medium">{currentMachine.id}</span>
+                            <span className="font-medium">
+                              {currentMachine.id}
+                            </span>
                           </div>
                           <div className="flex justify-between">
                             <span className="text-gray-600">Lokasi:</span>
-                            <span className="font-medium">{currentMachine.location}</span>
+                            <span className="font-medium">
+                              {currentMachine.location}
+                            </span>
                           </div>
                           <div className="flex justify-between">
                             <span className="text-gray-600">Operator:</span>
-                            <span className="font-medium">{currentMachine.operator}</span>
+                            <span className="font-medium">
+                              {currentMachine.operator}
+                            </span>
                           </div>
                           <div className="flex justify-between">
-                            <span className="text-gray-600">Runtime Saat Ini:</span>
-                            <span className="font-medium">{currentMachine.runtime}</span>
+                            <span className="text-gray-600">
+                              Runtime Saat Ini:
+                            </span>
+                            <span className="font-medium">
+                              {currentMachine.runtime}
+                            </span>
                           </div>
                           <div className="flex justify-between">
-                            <span className="text-gray-600">Total Runtime:</span>
-                            <span className="font-medium">{currentMachine.totalRuntime}</span>
+                            <span className="text-gray-600">
+                              Total Runtime:
+                            </span>
+                            <span className="font-medium">
+                              {currentMachine.totalRuntime}
+                            </span>
                           </div>
                         </div>
                       </div>
-                      
+
                       <div className="space-y-4">
-                        <h4 className="font-semibold text-gray-900">Spesifikasi</h4>
+                        <h4 className="font-semibold text-gray-900">
+                          Spesifikasi
+                        </h4>
                         <div className="space-y-3">
                           <div className="flex justify-between">
                             <span className="text-gray-600">Manufacturer:</span>
-                            <span className="font-medium">{currentMachine.manufacturer}</span>
+                            <span className="font-medium">
+                              {currentMachine.manufacturer}
+                            </span>
                           </div>
                           <div className="flex justify-between">
                             <span className="text-gray-600">Model:</span>
-                            <span className="font-medium">{currentMachine.model}</span>
+                            <span className="font-medium">
+                              {currentMachine.model}
+                            </span>
                           </div>
                           <div className="flex justify-between">
-                            <span className="text-gray-600">Tahun Install:</span>
-                            <span className="font-medium">{currentMachine.yearInstalled}</span>
+                            <span className="text-gray-600">
+                              Tahun Install:
+                            </span>
+                            <span className="font-medium">
+                              {currentMachine.yearInstalled}
+                            </span>
                           </div>
                           <div className="flex justify-between">
-                            <span className="text-gray-600">Pekerjaan Saat Ini:</span>
-                            <span className="font-medium">{currentMachine.currentJob}</span>
+                            <span className="text-gray-600">
+                              Pekerjaan Saat Ini:
+                            </span>
+                            <span className="font-medium">
+                              {currentMachine.currentJob}
+                            </span>
                           </div>
                         </div>
                       </div>
@@ -560,21 +655,32 @@ export default function Machines() {
                   <TabsContent value="maintenance" className="space-y-4">
                     <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
                       <div className="space-y-4">
-                        <h4 className="font-semibold text-gray-900">Jadwal Maintenance</h4>
+                        <h4 className="font-semibold text-gray-900">
+                          Jadwal Maintenance
+                        </h4>
                         <div className="space-y-3">
                           <div className="flex justify-between">
-                            <span className="text-gray-600">Maintenance Terakhir:</span>
+                            <span className="text-gray-600">
+                              Maintenance Terakhir:
+                            </span>
                             <span className="font-medium">
-                              {typeof currentMachine.lastMaintenance === 'string' && currentMachine.lastMaintenance.includes('-') 
-                                ? new Date(currentMachine.lastMaintenance).toLocaleDateString("id-ID")
-                                : currentMachine.lastMaintenance
-                              }
+                              {typeof currentMachine.lastMaintenance ===
+                                "string" &&
+                              currentMachine.lastMaintenance.includes("-")
+                                ? new Date(
+                                    currentMachine.lastMaintenance,
+                                  ).toLocaleDateString("id-ID")
+                                : currentMachine.lastMaintenance}
                             </span>
                           </div>
                           <div className="flex justify-between">
-                            <span className="text-gray-600">Maintenance Berikutnya:</span>
+                            <span className="text-gray-600">
+                              Maintenance Berikutnya:
+                            </span>
                             <span className="font-medium">
-                              {new Date(currentMachine.nextMaintenance).toLocaleDateString("id-ID")}
+                              {new Date(
+                                currentMachine.nextMaintenance,
+                              ).toLocaleDateString("id-ID")}
                             </span>
                           </div>
                           <div className="flex justify-between">
@@ -583,25 +689,35 @@ export default function Machines() {
                           </div>
                         </div>
                       </div>
-                      
+
                       <div className="space-y-4">
-                        <h4 className="font-semibold text-gray-900">Status Maintenance</h4>
+                        <h4 className="font-semibold text-gray-900">
+                          Status Maintenance
+                        </h4>
                         <div className="space-y-3">
                           <div className="flex items-center justify-between">
                             <span className="text-gray-600">Filter Udara:</span>
-                            <Badge className="bg-success-100 text-success-700">OK</Badge>
+                            <Badge className="bg-success-100 text-success-700">
+                              OK
+                            </Badge>
                           </div>
                           <div className="flex items-center justify-between">
                             <span className="text-gray-600">Oli Mesin:</span>
-                            <Badge className="bg-warning-100 text-warning-700">Perlu Ganti</Badge>
+                            <Badge className="bg-warning-100 text-warning-700">
+                              Perlu Ganti
+                            </Badge>
                           </div>
                           <div className="flex items-center justify-between">
                             <span className="text-gray-600">Belt:</span>
-                            <Badge className="bg-success-100 text-success-700">OK</Badge>
+                            <Badge className="bg-success-100 text-success-700">
+                              OK
+                            </Badge>
                           </div>
                           <div className="flex items-center justify-between">
                             <span className="text-gray-600">Kalibrasi:</span>
-                            <Badge className="bg-success-100 text-success-700">OK</Badge>
+                            <Badge className="bg-success-100 text-success-700">
+                              OK
+                            </Badge>
                           </div>
                         </div>
                       </div>
