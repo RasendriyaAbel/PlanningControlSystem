@@ -106,16 +106,16 @@ export function AppSidebar({ collapsed, onToggle }: AppSidebarProps) {
         onMouseEnter={() => setHoveredItem(item.href)}
         onMouseLeave={() => setHoveredItem(null)}
         className={cn(
-          "group relative flex items-center rounded-lg px-3 py-2.5 text-sm font-medium transition-all duration-200 hover:bg-production-50 hover:text-production-700",
+          "group relative flex items-center rounded-lg px-3 py-2.5 text-sm font-medium transition-all duration-200 hover:bg-blue-50 hover:text-blue-700",
           active
-            ? "bg-production-100 text-production-700 shadow-sm"
+            ? "bg-blue-100 text-blue-700 shadow-sm"
             : "text-gray-700 hover:text-gray-900",
         )}
       >
         <Icon
           className={cn(
             "h-5 w-5 shrink-0",
-            active ? "text-production-600" : "text-gray-500",
+            active ? "text-blue-600" : "text-gray-500",
           )}
         />
 
@@ -141,7 +141,7 @@ export function AppSidebar({ collapsed, onToggle }: AppSidebarProps) {
         )}
 
         {active && (
-          <div className="absolute inset-y-0 right-0 w-1 bg-production-600 rounded-l-full" />
+          <div className="absolute inset-y-0 right-0 w-1 bg-blue-600 rounded-l-full" />
         )}
       </Link>
     );
@@ -157,7 +157,7 @@ export function AppSidebar({ collapsed, onToggle }: AppSidebarProps) {
       {/* Header */}
       <div className="flex h-16 items-center border-b border-gray-200 px-4">
         <div className="flex items-center gap-2">
-          <div className="flex h-8 w-8 items-center justify-center rounded-lg bg-production-600 text-white">
+          <div className="flex h-8 w-8 items-center justify-center rounded-lg bg-blue-600 text-white">
             <Factory className="h-5 w-5" />
           </div>
           {!collapsed && (
@@ -205,7 +205,7 @@ export function AppSidebar({ collapsed, onToggle }: AppSidebarProps) {
       {!collapsed && (
         <div className="border-t border-gray-200 p-4">
           <div className="flex items-center gap-3">
-            <div className="h-10 w-10 rounded-full bg-gradient-to-r from-production-500 to-production-600 flex items-center justify-center text-white font-semibold">
+            <div className="h-10 w-10 rounded-full bg-gradient-to-r from-blue-500 to-blue-600 flex items-center justify-center text-white font-semibold">
               AM
             </div>
             <div className="flex-1 min-w-0">

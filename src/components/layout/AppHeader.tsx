@@ -83,13 +83,13 @@ export function AppHeader() {
   const getNotificationIcon = (type: string) => {
     switch (type) {
       case "warning":
-        return <AlertTriangle className="h-4 w-4 text-warning-500" />;
+        return <AlertTriangle className="h-4 w-4 text-yellow-500" />;
       case "success":
-        return <CheckCircle className="h-4 w-4 text-success-500" />;
+        return <CheckCircle className="h-4 w-4 text-green-500" />;
       case "error":
-        return <AlertTriangle className="h-4 w-4 text-danger-500" />;
+        return <AlertTriangle className="h-4 w-4 text-red-500" />;
       default:
-        return <Bell className="h-4 w-4 text-production-500" />;
+        return <Bell className="h-4 w-4 text-blue-500" />;
     }
   };
 
@@ -171,13 +171,13 @@ export function AppHeader() {
                       </p>
                     </div>
                     {!notification.read && (
-                      <div className="h-2 w-2 rounded-full bg-production-500" />
+                      <div className="h-2 w-2 rounded-full bg-blue-500" />
                     )}
                   </DropdownMenuItem>
                 ))}
               </div>
               <DropdownMenuSeparator />
-              <DropdownMenuItem className="text-center text-sm text-production-600 hover:text-production-700">
+              <DropdownMenuItem className="text-center text-sm text-blue-600 hover:text-blue-700">
                 Lihat semua notifikasi
               </DropdownMenuItem>
             </DropdownMenuContent>
@@ -187,7 +187,7 @@ export function AppHeader() {
           <DropdownMenu>
             <DropdownMenuTrigger asChild>
               <Button variant="ghost" className="relative h-9 w-9 rounded-full">
-                <div className="h-8 w-8 rounded-full bg-gradient-to-r from-production-500 to-production-600 flex items-center justify-center text-white text-sm font-semibold">
+                <div className="h-8 w-8 rounded-full bg-gradient-to-r from-blue-500 to-blue-600 flex items-center justify-center text-white text-sm font-semibold">
                   AM
                 </div>
               </Button>
