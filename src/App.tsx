@@ -6,6 +6,8 @@ import { BrowserRouter, Routes, Route } from "react-router-dom";
 import { AppLayout } from "./components/layout/AppLayout";
 import Dashboard from "./pages/Dashboard";
 import ProductionPlanning from "./pages/ProductionPlanning";
+import Inventory from "./pages/Inventory";
+import Machines from "./pages/Machines";
 import NotFound from "./pages/NotFound";
 
 const queryClient = new QueryClient();
@@ -37,14 +39,7 @@ const App = () => (
             path="/inventory"
             element={
               <AppLayout>
-                <div className="text-center py-12">
-                  <h2 className="text-2xl font-bold text-gray-900 mb-4">
-                    Manajemen Inventori
-                  </h2>
-                  <p className="text-gray-600">
-                    Halaman inventori sedang dalam pengembangan
-                  </p>
-                </div>
+                <Inventory />
               </AppLayout>
             }
           />
@@ -52,14 +47,7 @@ const App = () => (
             path="/machines"
             element={
               <AppLayout>
-                <div className="text-center py-12">
-                  <h2 className="text-2xl font-bold text-gray-900 mb-4">
-                    Monitoring Mesin
-                  </h2>
-                  <p className="text-gray-600">
-                    Halaman monitoring mesin sedang dalam pengembangan
-                  </p>
-                </div>
+                <Machines />
               </AppLayout>
             }
           />
